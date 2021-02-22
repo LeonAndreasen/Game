@@ -5,23 +5,31 @@ local current_color = {1,1,1,1}
 love.load = function()
     print("Game is done loading")
     x = 0 
-
+y= 0
 end
 
 --spellogik
 love.update = function (dt)
-    r = r + 10 *dt
-    x = x + 1
+   -- r = r + 10 *dt
+
 end
 love.keypressed = function(pressed_key)
     if pressed_key == "d" then
-        love.draw = function ()
-            love.graphics.circle("fill",x,230,100) if pressed_key == "a" then 
-                love.draw = function ()     
-                end end end end end
+        x = x + 10
+ elseif pressed_key == "s" then 
+                y = y + 10
+ end
+ if pressed_key == "a" then x = x -10
+ end
+ if pressed_key == "w" then y = y -10 
+end
+end
+
 --ritar ut
 
-
+love.draw = function ()
+    love.graphics.circle("fill",x,y,100)
+end
 
 
 
