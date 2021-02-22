@@ -11,7 +11,10 @@ end
 --spellogik
 love.update = function (dt)
    -- r = r + 10 *dt
-
+if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then 
+    x= x + 10 end if love.keyboard.isDown("s") and love.keyboard.isDown("lshift")then y= y + 10 end 
+    if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then x = x -10 end 
+    if love.keyboard.isDown("w") and love.keyboard.isDown("lshift")then y= y -10 end
 end
 love.keypressed = function(pressed_key)
     if pressed_key == "d" then
