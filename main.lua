@@ -29,7 +29,7 @@ love.update = function (dt)
 if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then 
     playerJohnny.x= x + 10 end if love.keyboard.isDown("s") and love.keyboard.isDown("lshift")then playerJohnny.y= y + 10 end 
     if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then playerJohnny.x = x -10 end 
-    if love.keyboard.isDown("space") and love.keyboard.isDown("lshift")then playerJohnny.y= y -10 end
+    if love.keyboard.isDown("space") and love.keyboard.isDown("lshift")then playerJohnny.y= y -10 end --behöver ta reda på hur jag kan få karaktären att springa när jag håller ner lshift + knapp
 end
 love.keypressed = function(pressed_key)
     if love.keyboard.isDown("d") then x = x + 10
