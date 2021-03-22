@@ -1,7 +1,6 @@
 playerJohnny = {}
 platform = {}
-x= 0
-y= 0
+p = 1
 --callback funktioner (spelmotorn som hämtar funktionerna istället för vi)
 
 love.load = function()
@@ -20,29 +19,37 @@ love.load = function()
     Sprite = love.graphics.newImage('Johnny.png')
 
      playerJohnny.speed = 150
+     playerJohnny.ground = playerJohnny.y
+     playerJohnny.y_velocity = 0
+     playerJohnny.jump_height = -250
 end
 
 --spellogik
 love.update = function (dt)
-   -- r = r + 10 *dt
-
-if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then 
-    playerJohnny.x= x + 10 end if love.keyboard.isDown("s") and love.keyboard.isDown("lshift")then playerJohnny.y= y + 10 end 
-    if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then playerJohnny.x = x -10 end 
-    if love.keyboard.isDown("space") and love.keyboard.isDown("lshift")then playerJohnny.y= y -10 end --behöver ta reda på hur jag kan få karaktären att springa när jag håller ner lshift + knapp
+    --walking mechanic
+   if love.keyboard.isDown("d") then playerJohnny.x = playerJohnny.x + (playerJohnny.speed * dt)  end
+   if love.keyboard.isDown("a") then playerJohnny.x = playerJohnny.x - (playerJohnny.speed * dt)
+   end
 end
-love.keypressed = function(pressed_key)
-    if love.keyboard.isDown("d") then x = x + 10
-    elseif pressed_key == "s" then   y = y + 10
-    elseif pressed_key == "a" then x = x -10
-    elseif pressed_key == "space" then y = y -10 
-    end
-    end
+function love.keypressed(key)
+    if key == "a" then p = -1 elseif key == "d" then p = 1
+end
+   --Jump mechanic
+   if love.keyboard.isDown("space") then if playerJohnny.y_velocity== 0 then
+        playerJohnny.y_velocity = playerJohnny.jump_height end end
+    --Jump physics
 
---ritar ut
+   --Running mechanic
+    if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then 
+        playerJohnny.x= playerJohnny.x + (playerJohnny.speed * dt +4)  end  
+    if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then 
+        playerJohnny.x =playerJohnny.x - (playerJohnny.speed * dt + 4) end 
+end
+
+--Draws the ground and Sprite
 
 love.draw = function ()
-    love.graphics.draw(Sprite,playerJohnny.x,playerJohnny.y,0,1,1,0,-20)
+    love.graphics.draw(Sprite,playerJohnny.x,playerJohnny.y,0,p,1,0,-50)
     love.graphics.setColor(1,1,1)
     love.graphics.rectangle('fill',platform.x,platform.y,platform.width,platform.height)
 end
@@ -50,6 +57,5 @@ end
 
 
 
---    love.graphics.setColor(current_color)
---love.graphics.polygon("fill", circle)
+
 
