@@ -1,5 +1,9 @@
 {
     "Lua.diagnostics.disable": [
         "empty-block"
+    ],
+    "Lua.diagnostics.globals": [
+        "love",
+        
     ]
 }

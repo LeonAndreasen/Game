@@ -1,6 +1,6 @@
 playerJohnny = {}
 platform = {}
-p = 1
+p = 1 --value for the sprite to be mirrored
 --callback funktioner (spelmotorn som hämtar funktionerna istället för vi)
 
 love.load = function()
@@ -18,7 +18,7 @@ love.load = function()
 
     Sprite = love.graphics.newImage('Johnny.png')
 
-     playerJohnny.speed = 150
+     playerJohnny.speed = 125
      playerJohnny.ground = playerJohnny.y
      playerJohnny.y_velocity = 0
      playerJohnny.jump_height = -250
@@ -30,21 +30,28 @@ love.update = function (dt)
    if love.keyboard.isDown("d") then playerJohnny.x = playerJohnny.x + (playerJohnny.speed * dt)  end
    if love.keyboard.isDown("a") then playerJohnny.x = playerJohnny.x - (playerJohnny.speed * dt)
    end
+
+--Running mechanic
+if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then 
+    playerJohnny.x= playerJohnny.x + (playerJohnny.speed * dt + 3)  end  
+if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then 
+    playerJohnny.x =playerJohnny.x - (playerJohnny.speed * dt + 3) end 
 end
+
+--mirroring the sprite
 function love.keypressed(key)
-    if key == "a" then p = -1 elseif key == "d" then p = 1
-end
+    if key == "a" then p = -1 elseif key == "d" then p = 1 end end
+
    --Jump mechanic
    if love.keyboard.isDown("space") then if playerJohnny.y_velocity== 0 then
         playerJohnny.y_velocity = playerJohnny.jump_height end end
     --Jump physics
 
-   --Running mechanic
-    if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then 
-        playerJohnny.x= playerJohnny.x + (playerJohnny.speed * dt +4)  end  
-    if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then 
-        playerJohnny.x =playerJohnny.x - (playerJohnny.speed * dt + 4) end 
-end
+   
+        
+    
+
+
 
 --Draws the ground and Sprite
 
