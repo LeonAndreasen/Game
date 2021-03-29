@@ -36,21 +36,29 @@ if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then
     playerJohnny.x= playerJohnny.x + (playerJohnny.speed * dt + 3)  end  
 if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then 
     playerJohnny.x =playerJohnny.x - (playerJohnny.speed * dt + 3) end 
-end
 
---mirroring the sprite
+
+--mirroring the sprite 
 function love.keypressed(key)
     if key == "a" then p = -1 elseif key == "d" then p = 1 end end
 
    --Jump mechanic
-   if love.keyboard.isDown("space") then if playerJohnny.y_velocity== 0 then
-        playerJohnny.y_velocity = playerJohnny.jump_height end end
-    --Jump physics
-
-   
+   if love.keyboard.isDown("space") then if playerJohnny.y_velocity == 0 then
+        playerJohnny.y_velocity = playerJohnny.jump_height 
+        end  end 
         
+    --Jump physics
+    if playerJohnny.y_velocity ~= 0 then                                     
+        playerJohnny.y = playerJohnny.y + playerJohnny.y_velocity * dt                
+        playerJohnny.y_velocity = playerJohnny.y_velocity - playerJohnny.gravity * dt
+    end
+    if playerJohnny.y > playerJohnny.ground then
+        playerJohnny.y_velocity = 0
+        playerJohnny.y = playerJohnny.ground
+    end
     
 
+    end
 
 
 --Draws the ground and Sprite
