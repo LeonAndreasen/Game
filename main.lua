@@ -3,10 +3,12 @@ platform = {}
 ball ={}
 p = 1 --value for the sprite to be mirrored
 
-Timer = 1
+Timer = 0
 ScoreMultiplier = 1
+
 love.load = function()
     print("Game is done loading")
+    world = love.physics.newWorld(0,200,true)
     --Platform
     platform.width = love.graphics.getWidth()
 	platform.height = love.graphics.getHeight()
@@ -27,6 +29,7 @@ end
 
 --spellogik
 love.update = function (dt)
+    world:update(dt)
     --walking mechanic
    if love.keyboard.isDown("d") then playerJohnny.x = playerJohnny.x + (playerJohnny.speed * dt)  end
    if love.keyboard.isDown("a") then playerJohnny.x = playerJohnny.x - (playerJohnny.speed * dt)
@@ -82,7 +85,15 @@ love.draw = function ()
     love.graphics.circle('fill',1400 / ScoreMultiplier, 260, 30, 100 ) end
     --print out Score on the screen
     print(Spawn)
-    love.graphics.printf("Score: "..math.floor(Timer)* 10,100, 1,620,"left",0,2,2)
+    love.graphics.printf("Score: "..math.floor(Timer)* 10,0, 1,620,"left",0,2,2)
+    --
+  if Timer < 1 then
+    love.graphics.print("Press Spacebar to start! ",300,200, 0, 1.5,1.5) 
+    love.graphics.print("controls:",200,20)
+    love.graphics.print("A,D and Spacebar",200,35)
+    love.graphics.print("lshift + key = Running",200,50)
+end
+
 end
 
 
