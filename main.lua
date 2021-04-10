@@ -2,10 +2,9 @@ playerJohnny = {}
 platform = {}
 p = 1 --value for the sprite to be mirrored
 --callback funktioner (spelmotorn som hämtar funktionerna istället för vi)
-
+Timer = 1
 love.load = function()
     print("Game is done loading")
-    World = love.physics.newWorld(1,2)
     platform.width = love.graphics.getWidth()
 	platform.height = love.graphics.getHeight()
     platform.x = 0
@@ -14,14 +13,14 @@ love.load = function()
     playerJohnny.x = love.graphics.getWidth() / 2
 	playerJohnny.y = love.graphics.getHeight() / 2
 
-    playerJohnny.gravity = -300
+    playerJohnny.gravity = -600
 
     Sprite = love.graphics.newImage('Johnny.png')
 
      playerJohnny.speed = 125
      playerJohnny.ground = playerJohnny.y
      playerJohnny.y_velocity = 0
-     playerJohnny.jump_height = -250
+     playerJohnny.jump_height = -400
 end
 
 --spellogik
@@ -56,7 +55,7 @@ function love.keypressed(key)
         playerJohnny.y_velocity = 0
         playerJohnny.y = playerJohnny.ground
     end
-    
+    Timer = Timer + dt
 
     end
 
@@ -64,10 +63,14 @@ function love.keypressed(key)
 --Draws the ground and Sprite
 
 love.draw = function ()
-    love.graphics.draw(Sprite,playerJohnny.x,playerJohnny.y,0,p,1,0,-50)
+    love.graphics.draw(Sprite,playerJohnny.x,playerJohnny.y,0,p,1,0,-54)
     love.graphics.setColor(1,1,1)
     love.graphics.rectangle('fill',platform.x,platform.y,platform.width,platform.height)
+    love.graphics.circle('fill',1400 / ScoreMultiplier, 450, 30, 100 )
+
+    love.graphics.printf("Score: "..math.floor(Timer)* 10,300, 215,620)
 end
+ScoreMultiplier = 2
 
 
 
