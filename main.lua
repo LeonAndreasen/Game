@@ -74,6 +74,7 @@ function love.keypressed(key)
     end
     if key == "r" then 
         ScoreMultiplier = 1 + dt
+        number = love.math.random(4)
     end
 end
 
@@ -95,8 +96,7 @@ end
     Timer = Timer + dt
     if Timer > 1 then ScoreMultiplier = ScoreMultiplier + dt end
     
-    if Timer > 7 then number = 2
-    end
+    
 
     balls.x = balls.x + (balls.vx * dt)
     balls.y = balls.y + (balls.vy * dt)
@@ -120,6 +120,10 @@ love.draw = function ()
     love.graphics.setColor(1,1,1)
     love.graphics.rectangle('fill',platform.x,platform.y,platform.width,platform.height)
 
+    if Timer > 4 then balls.x = 1600  end
+        if Timer > 4 then ScoreMultiplier = ScoreMultiplier
+        
+    end
 
     if number == 1 then 
         love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 450, 30, 100 )end
@@ -149,6 +153,7 @@ love.draw = function ()
     love.graphics.print("controls:",200,20)
     love.graphics.print("A,D and Spacebar         q to quit and r to restart",200,35)
     love.graphics.print("lshift + key = Running",200,50)
+    
 end
 end
 
