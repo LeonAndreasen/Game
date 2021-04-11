@@ -1,11 +1,15 @@
 playerJohnny = {}
 platform = {}
-ball ={}
+local balls ={
+    x = 1600,
+    y = 450,
+    vx = 100,
+    vy = 0,
+}
 p = 1 --value for the sprite to be mirrored
 
 Timer = 0
-ScoreMultiplier = 1
-
+ScoreMultiplier = 1 
 love.load = function()
     print("Game is done loading")
     world = love.physics.newWorld(0,200,true)
@@ -31,6 +35,11 @@ end
 love.update = function (dt)
     world:update(dt)
     --walking mechanic
+
+    Spawn = love.math.random(4) 
+     number = Spawn 
+     print(Spawn)  
+     
    if love.keyboard.isDown("d") then playerJohnny.x = playerJohnny.x + (playerJohnny.speed * dt)  end
    if love.keyboard.isDown("a") then playerJohnny.x = playerJohnny.x - (playerJohnny.speed * dt)
    end
@@ -40,7 +49,12 @@ if love.keyboard.isDown("d") and love.keyboard.isDown("lshift") then
     playerJohnny.x= playerJohnny.x + (playerJohnny.speed * dt + 3)  end  
 if love.keyboard.isDown("a") and love.keyboard.isDown("lshift") then 
     playerJohnny.x =playerJohnny.x - (playerJohnny.speed * dt + 3) end 
-
+   
+-- quits the Game
+    if love.keyboard.isDown("q")
+    then
+       love.event.quit()
+     end
 
 --mirroring the sprite 
 function love.keypressed(key)
@@ -62,38 +76,57 @@ function love.keypressed(key)
     end
     --Score counter
     Timer = Timer + dt
-    if Timer > 3 then ScoreMultiplier = ScoreMultiplier + dt end
-    end
+    if Timer > 1 then ScoreMultiplier = ScoreMultiplier + dt end
+    
 
- -- randomizes the spawns of the balls
-Spawn = love.math.random(100)
+    balls.x = balls.x + (balls.vx * dt)
+    balls.y = balls.y + (balls.vy * dt)
 
---Draws the ground and Sprite
+    
+    
+     end 
+
+ 
+     
+
+
+
+
 
 love.draw = function ()
+    
+    --Draws the ground and Sprite
     love.graphics.draw(Sprite,playerJohnny.x,playerJohnny.y,0,p,1,0,-54)
     love.graphics.setColor(1,1,1)
     love.graphics.rectangle('fill',platform.x,platform.y,platform.width,platform.height)
+
+
+    if number == 1 then 
+        love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 450, 30, 100 )
+        elseif number == 2 then
+        love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 390, 30, 100 )
+        end
+        if number == 3 then
+            love.graphics.circle('fill',balls.x -300 *  ScoreMultiplier, 320, 30, 100 )
+            elseif number == 4 then
+            love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 260, 30, 100 ) 
+        end
    --Collision objects
-   if Spawn < 25 then 
-    love.graphics.circle('fill',1400 / ScoreMultiplier, 450, 30, 100 )
-   elseif Spawn < 50 and Spawn > 25 then
-    love.graphics.circle('fill',1400 / ScoreMultiplier, 390, 30, 100 )
-   elseif Spawn < 75 and Spawn > 50 then
-    love.graphics.circle('fill',1400 / ScoreMultiplier, 320, 30, 100 )
-   elseif Spawn > 75 and Spawn < 100 then
-    love.graphics.circle('fill',1400 / ScoreMultiplier, 260, 30, 100 ) end
+   
+    
+
+   
+    
     --print out Score on the screen
-    print(Spawn)
     love.graphics.printf("Score: "..math.floor(Timer)* 10,0, 1,620,"left",0,2,2)
-    --
+
+    --Instructions
   if Timer < 1 then
     love.graphics.print("Press Spacebar to start! ",300,200, 0, 1.5,1.5) 
     love.graphics.print("controls:",200,20)
     love.graphics.print("A,D and Spacebar",200,35)
     love.graphics.print("lshift + key = Running",200,50)
 end
-
 end
 
 
