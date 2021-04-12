@@ -36,6 +36,7 @@ for i = 1, 10, 1 do
     
 end
     
+
 end
 
 
@@ -107,7 +108,6 @@ if balls.x > 0 then
 end 
 
  
-     
 
 
 
@@ -125,18 +125,20 @@ love.draw = function ()
         
     end
 
+
+
     if number == 1 then 
-        love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 450, 30, 100 )end
+      ball1 =  love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 450, 30, 100 )end
     
         if number == 2 then
-        love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 390, 30, 100 )end
+      ball2 =  love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 390, 30, 100 )end
         
         
         if number == 3 then
-            love.graphics.circle('fill',balls.x -300 *  ScoreMultiplier, 320, 30, 100 )end
+         ball3 =   love.graphics.circle('fill',balls.x -300 *  ScoreMultiplier, 320, 30, 100 )end
         
             if number == 4 then
-            love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 260, 30, 100 ) end
+             ball4 =   love.graphics.circle('fill',balls.x - 300 * ScoreMultiplier, 260, 30, 100 ) end
         
    --Collision objects
    
